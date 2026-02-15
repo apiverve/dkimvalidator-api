@@ -51,7 +51,6 @@ namespace APIVerve.API.DKIMValidator
         public string KeyType { get; set; }
 
         [JsonProperty("selector")]
-        [JsonConverter(typeof(ParseStringConverter))]
         public long Selector { get; set; }
 
         [JsonProperty("valid")]
