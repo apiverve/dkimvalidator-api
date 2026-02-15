@@ -12,7 +12,6 @@ namespace APIVerve.API.DKIMValidator
     {
         /// <summary>
         /// The domain to validate the DKIM record for
-        /// Example: google.com
         /// </summary>
         [JsonProperty("domain")]
         public string Domain { get; set; }
