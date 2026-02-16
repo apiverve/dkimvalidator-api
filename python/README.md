@@ -231,8 +231,9 @@ from apiverve_dkimvalidator.apiClient import DkimvalidatorAPIClient
 
 api = DkimvalidatorAPIClient("[YOUR_API_KEY]")
 
+query = { "domain": "google.com" }
+
 try:
-    query = { "domain": "google.com" }
     result = api.execute(query)
     print(result)
 finally:
