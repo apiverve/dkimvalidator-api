@@ -1,6 +1,6 @@
 {
   "name": "@apiverve/dkimvalidator",
-  "version": "1.1.13",
+  "version": "1.1.14",
   "description": "DKIM Validator checks the DomainKeys Identified Mail (DKIM) DNS records for a domain to verify that they are present and correctly formatted.",
   "main": "index.js",
   "types": "index.d.ts",
