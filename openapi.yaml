@@ -63,11 +63,15 @@ paths:
                   dkim_records_count: 1
                   version: DKIM1
                   key_type: rsa
+                  key_bits: 1416
+                  is_test_mode: false
                   issues_found:
                     - code: WEAK_PUBLIC_KEY_BITS
                       type: warning
                       message: Public key uses weak 1416 bits
                   valid: true
+                  risk_score: 25
+                  risk_level: medium
         '401':
           description: Your request was not authorized, or your API Key was invalid
         '404':
