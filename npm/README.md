@@ -122,22 +122,27 @@ async function makeRequest() {
   "status": "ok",
   "error": null,
   "data": {
+    "selector": "20230601",
+    "host": "google.com",
     "dkim_host": "20230601._domainkey.google.com",
+    "cname_target": null,
+    "has_dkim_record": true,
     "dkim_record": "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zd3nfUoLHWFbfoPZzAb8bvjsFIIFsNypweLuPe4M+vAP1YxObFxRnpvLYz7Z+bORKLber5aGmgFF9iaufsH1z0+aw8Qex7uDaafzWoJOM/6lAS5iI0JggZiUkqNpRQLL7H6E7HcvOMC61nJcO4r0PwLDZKwEaCs8gUHiqRn/SS3wqEZX29v/VOUVcI4BjaOz",
     "dkim_records_count": 1,
-    "has_dkim_record": true,
-    "host": "google.com",
+    "version": "DKIM1",
+    "key_type": "rsa",
+    "key_bits": 1416,
+    "is_test_mode": false,
     "issues_found": [
       {
         "code": "WEAK_PUBLIC_KEY_BITS",
-        "message": "Public key uses weak 1416 bits",
-        "type": "warning"
+        "type": "warning",
+        "message": "Public key uses weak 1416 bits"
       }
     ],
-    "key_type": "rsa",
-    "selector": "20230601",
     "valid": true,
-    "version": "DKIM1"
+    "risk_score": 25,
+    "risk_level": "medium"
   }
 }
 ```
