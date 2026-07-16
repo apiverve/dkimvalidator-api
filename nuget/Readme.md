@@ -51,7 +51,7 @@ Here's a simple example to get you started quickly:
 
 ```csharp
 using System;
-using APIVerve;
+using APIVerve.API.DKIMValidator;
 
 class Program
 {
@@ -60,8 +60,8 @@ class Program
         // Initialize the API client
         var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]");
 
-        var queryOptions = new QueryOptions {
-    domain = "google.com"
+        var queryOptions = new DKIMValidatorQueryOptions {
+    Domain = "google.com"
 };
 
         // Make the API call
@@ -116,7 +116,7 @@ The modern async/await pattern provides the best performance and code readabilit
 ```csharp
 using System;
 using System.Threading.Tasks;
-using APIVerve;
+using APIVerve.API.DKIMValidator;
 
 public class Example
 {
@@ -124,8 +124,8 @@ public class Example
     {
         var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]");
 
-        var queryOptions = new QueryOptions {
-    domain = "google.com"
+        var queryOptions = new DKIMValidatorQueryOptions {
+    Domain = "google.com"
 };
 
         var response = await apiClient.ExecuteAsync(queryOptions);
@@ -148,7 +148,7 @@ If you need to use synchronous code, you can use the `Execute` method:
 
 ```csharp
 using System;
-using APIVerve;
+using APIVerve.API.DKIMValidator;
 
 public class Example
 {
@@ -156,8 +156,8 @@ public class Example
     {
         var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]");
 
-        var queryOptions = new QueryOptions {
-    domain = "google.com"
+        var queryOptions = new DKIMValidatorQueryOptions {
+    Domain = "google.com"
 };
 
         var response = apiClient.Execute(queryOptions);
@@ -185,7 +185,7 @@ The API client provides comprehensive error handling. Here are some examples:
 ```csharp
 using System;
 using System.Threading.Tasks;
-using APIVerve;
+using APIVerve.API.DKIMValidator;
 
 public class Example
 {
@@ -193,8 +193,8 @@ public class Example
     {
         var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]");
 
-        var queryOptions = new QueryOptions {
-    domain = "google.com"
+        var queryOptions = new DKIMValidatorQueryOptions {
+    Domain = "google.com"
 };
 
         try
@@ -237,7 +237,7 @@ public class Example
 ```csharp
 using System;
 using System.Threading.Tasks;
-using APIVerve;
+using APIVerve.API.DKIMValidator;
 
 public class Example
 {
@@ -249,8 +249,8 @@ public class Example
         apiClient.SetMaxRetries(3);        // Retry up to 3 times (default: 0, max: 3)
         apiClient.SetRetryDelay(2000);     // Wait 2 seconds between retries
 
-        var queryOptions = new QueryOptions {
-    domain = "google.com"
+        var queryOptions = new DKIMValidatorQueryOptions {
+    Domain = "google.com"
 };
 
         try
@@ -290,8 +290,8 @@ var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]");
 apiClient.AddCustomHeader("X-Custom-Header", "custom-value");
 apiClient.AddCustomHeader("X-Request-ID", Guid.NewGuid().ToString());
 
-var queryOptions = new QueryOptions {
-    domain = "google.com"
+var queryOptions = new DKIMValidatorQueryOptions {
+    Domain = "google.com"
 };
 
 var response = await apiClient.ExecuteAsync(queryOptions);
@@ -316,8 +316,8 @@ apiClient.SetLogger(message =>
     Console.WriteLine($"[LOG] {DateTime.Now:yyyy-MM-dd HH:mm:ss} - {message}");
 });
 
-var queryOptions = new QueryOptions {
-    domain = "google.com"
+var queryOptions = new DKIMValidatorQueryOptions {
+    Domain = "google.com"
 };
 
 var response = await apiClient.ExecuteAsync(queryOptions);
@@ -334,8 +334,8 @@ var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]");
 apiClient.SetMaxRetries(3);           // Retry up to 3 times (default: 0, max: 3)
 apiClient.SetRetryDelay(1500);        // Wait 1.5 seconds between retries (default: 1000ms)
 
-var queryOptions = new QueryOptions {
-    domain = "google.com"
+var queryOptions = new DKIMValidatorQueryOptions {
+    Domain = "google.com"
 };
 
 var response = await apiClient.ExecuteAsync(queryOptions);
@@ -346,8 +346,8 @@ var response = await apiClient.ExecuteAsync(queryOptions);
 The API client implements `IDisposable` for proper resource cleanup:
 
 ```csharp
-var queryOptions = new QueryOptions {
-    domain = "google.com"
+var queryOptions = new DKIMValidatorQueryOptions {
+    Domain = "google.com"
 };
 
 using (var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]"))
@@ -367,22 +367,27 @@ using (var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]"))
   "status": "ok",
   "error": null,
   "data": {
+    "selector": "20230601",
+    "host": "google.com",
     "dkim_host": "20230601._domainkey.google.com",
+    "cname_target": null,
+    "has_dkim_record": true,
     "dkim_record": "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zd3nfUoLHWFbfoPZzAb8bvjsFIIFsNypweLuPe4M+vAP1YxObFxRnpvLYz7Z+bORKLber5aGmgFF9iaufsH1z0+aw8Qex7uDaafzWoJOM/6lAS5iI0JggZiUkqNpRQLL7H6E7HcvOMC61nJcO4r0PwLDZKwEaCs8gUHiqRn/SS3wqEZX29v/VOUVcI4BjaOz",
     "dkim_records_count": 1,
-    "has_dkim_record": true,
-    "host": "google.com",
+    "version": "DKIM1",
+    "key_type": "rsa",
+    "key_bits": 1416,
+    "is_test_mode": false,
     "issues_found": [
       {
         "code": "WEAK_PUBLIC_KEY_BITS",
-        "message": "Public key uses weak 1416 bits",
-        "type": "warning"
+        "type": "warning",
+        "message": "Public key uses weak 1416 bits"
       }
     ],
-    "key_type": "rsa",
-    "selector": "20230601",
     "valid": true,
-    "version": "DKIM1"
+    "risk_score": 25,
+    "risk_level": "medium"
   }
 }
 ```
