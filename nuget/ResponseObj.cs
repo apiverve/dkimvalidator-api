@@ -25,39 +25,57 @@ namespace APIVerve.API.DKIMValidator
 
         [JsonProperty("data")]
         public Data Data { get; set; }
+
+        [JsonProperty("premium")]
+        public Premium Premium { get; set; }
     }
 
     public partial class Data
     {
+        [JsonProperty("selector")]
+        public long? Selector { get; set; }
+
+        [JsonProperty("host")]
+        public string Host { get; set; }
+
         [JsonProperty("dkim_host")]
         public string DkimHost { get; set; }
+
+        [JsonProperty("cname_target")]
+        public object CnameTarget { get; set; }
+
+        [JsonProperty("has_dkim_record")]
+        public bool? HasDkimRecord { get; set; }
 
         [JsonProperty("dkim_record")]
         public string DkimRecord { get; set; }
 
         [JsonProperty("dkim_records_count")]
-        public long DkimRecordsCount { get; set; }
+        public long? DkimRecordsCount { get; set; }
 
-        [JsonProperty("has_dkim_record")]
-        public bool HasDkimRecord { get; set; }
-
-        [JsonProperty("host")]
-        public string Host { get; set; }
-
-        [JsonProperty("issues_found")]
-        public IssuesFound[] IssuesFound { get; set; }
+        [JsonProperty("version")]
+        public string Version { get; set; }
 
         [JsonProperty("key_type")]
         public string KeyType { get; set; }
 
-        [JsonProperty("selector")]
-        public long Selector { get; set; }
+        [JsonProperty("key_bits")]
+        public long? KeyBits { get; set; }
+
+        [JsonProperty("is_test_mode")]
+        public bool? IsTestMode { get; set; }
+
+        [JsonProperty("issues_found")]
+        public IssuesFound[] IssuesFound { get; set; }
 
         [JsonProperty("valid")]
-        public bool Valid { get; set; }
+        public bool? Valid { get; set; }
 
-        [JsonProperty("version")]
-        public string Version { get; set; }
+        [JsonProperty("risk_score")]
+        public long? RiskScore { get; set; }
+
+        [JsonProperty("risk_level")]
+        public string RiskLevel { get; set; }
     }
 
     public partial class IssuesFound
@@ -65,10 +83,22 @@ namespace APIVerve.API.DKIMValidator
         [JsonProperty("code")]
         public string Code { get; set; }
 
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
+    }
+
+    public partial class Premium
+    {
         [JsonProperty("message")]
         public string Message { get; set; }
 
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("upgrade_url")]
+        public Uri UpgradeUrl { get; set; }
+
+        [JsonProperty("locked_fields")]
+        public string[] LockedFields { get; set; }
     }
 }
