@@ -1,13 +1,13 @@
-# [DKIM Validator API](https://apiverve.com/marketplace/dkimvalidator?utm_source&#x3D;github&amp;utm_medium&#x3D;readme)
+# [DKIM Validator API](https://apiverve.com/marketplace/dkimvalidator?utm_source&#x3D;github&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;readme)
 
 DKIM Validator checks the DomainKeys Identified Mail (DKIM) DNS records for a domain to verify that they are present and correctly formatted.
 
 The DKIM Validator API provides a simple, reliable way to integrate dkim validator functionality into your applications. Built for developers who need production-ready dkim validator capabilities without the complexity of building from scratch.
 
-**[View API Details →](https://apiverve.com/marketplace/dkimvalidator?utm_source&#x3D;github&amp;utm_medium&#x3D;readme)**
+**[View API Details →](https://apiverve.com/marketplace/dkimvalidator?utm_source&#x3D;github&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;readme)**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![API Status](https://img.shields.io/badge/Status-Active-green.svg)](https://apiverve.com/marketplace/dkimvalidator?utm_source&#x3D;github&amp;utm_medium&#x3D;readme)
+[![API Status](https://img.shields.io/badge/Status-Active-green.svg)](https://apiverve.com/marketplace/dkimvalidator?utm_source&#x3D;github&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;readme)
 [![Method](https://img.shields.io/badge/Method-GET-blue.svg)](#)
 [![Platform](https://img.shields.io/badge/Platform-Multi--Platform-orange.svg)](#installation)
 
@@ -31,7 +31,8 @@ The DKIM Validator API provides a simple, reliable way to integrate dkim validat
 async function callDKIMValidatorAPI() {
     try {
         const params = new URLSearchParams({
-            domain: 'google.com'
+            domain: 'github.com',
+            selector: 's1'
         });
 
         const response = await fetch(`https://api.apiverve.com/v1/dkimvalidator?${params}`, {
@@ -54,7 +55,7 @@ callDKIMValidatorAPI();
 ### Using cURL
 
 ```bash
-curl -X GET "https://api.apiverve.com/v1/dkimvalidator?domain=google.com" \
+curl -X GET "https://api.apiverve.com/v1/dkimvalidator?domain=github.com&selector=s1" \
   -H "x-api-key: YOUR_API_KEY_HERE"
 ```
 
@@ -161,7 +162,7 @@ go get github.com/apiverve/dkimvalidator-api/go
 
 ## Documentation
 
-- 🏠 **API Home:** [DKIM Validator API](https://apiverve.com/marketplace/dkimvalidator?utm_source&#x3D;github&amp;utm_medium&#x3D;readme)
+- 🏠 **API Home:** [DKIM Validator API](https://apiverve.com/marketplace/dkimvalidator?utm_source&#x3D;github&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;readme)
 - 📚 **API Reference:** [docs.apiverve.com/ref/dkimvalidator](https://docs.apiverve.com/ref/dkimvalidator)
 - 📖 **OpenAPI Spec:** [openapi.yaml](./openapi.yaml)
 - 💡 **Examples:** [examples/](./examples/)
@@ -211,27 +212,31 @@ A real response from the DKIM Validator API:
   "status": "ok",
   "error": null,
   "data": {
-    "selector": "20230601",
-    "host": "google.com",
-    "dkim_host": "20230601._domainkey.google.com",
+    "selector": "s1",
+    "host": "github.com",
+    "dkim_host": "s1._domainkey.github.com",
     "cname_target": null,
     "has_dkim_record": true,
-    "dkim_record": "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zd3nfUoLHWFbfoPZzAb8bvjsFIIFsNypweLuPe4M+vAP1YxObFxRnpvLYz7Z+bORKLber5aGmgFF9iaufsH1z0+aw8Qex7uDaafzWoJOM/6lAS5iI0JggZiUkqNpRQLL7H6E7HcvOMC61nJcO4r0PwLDZKwEaCs8gUHiqRn/SS3wqEZX29v/VOUVcI4BjaOz",
+    "dkim_record": "k=rsa; t=s; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyn3fMCVpb7ryIRKOGXhXVGYmsWUitNlSckqGHOwNFZgFadplOrD+Qzf1XQkP7MH/VB/97DsAAJGtEXW1Uq71Hjnfr/DuBN/YfjF/gU70qEFb7q1sdIiNtjFL2TkOpoW+X/bhhPNheW/fYwyFb6ZHFM6LTgXyuimWRHTOUP3VjZzhNVda79nt+2WZYbS4l8HdMgWpTNHjpVw5PtXESA9KBg/evSRk5fIaXIX5eRXW3baoV9yVzD8O29/IL/DiSk+yNvaO0EHL5c4yGuZJhGzvpiznb2IDVdemJK4Dqzdy5FTN/SGYZhAEr7MguG3Z314hMS2scgMsOMgB64uj/6+6UwIDAQAB",
     "dkim_records_count": 1,
-    "version": "DKIM1",
     "key_type": "rsa",
-    "key_bits": 1416,
-    "is_test_mode": false,
     "issues_found": [
       {
-        "code": "WEAK_PUBLIC_KEY_BITS",
+        "code": "V_TAG_NOT_FOUND",
         "type": "warning",
-        "message": "Public key uses weak 1416 bits"
+        "message": "The v tag is missing"
+      },
+      {
+        "code": "STRICT_MODE",
+        "type": "info",
+        "message": "Strict flag set (t=s): the i= identity domain must exactly match d= (no subdomains)"
       }
     ],
     "valid": true,
-    "risk_score": 25,
-    "risk_level": "medium"
+    "key_bits": 2048,
+    "is_test_mode": false,
+    "risk_score": 0,
+    "risk_level": "low"
   }
 }
 ```
@@ -240,7 +245,7 @@ A real response from the DKIM Validator API:
 
 ## Support & Community
 
-- 🏠 **API Home**: [DKIM Validator API](https://apiverve.com/marketplace/dkimvalidator?utm_source&#x3D;github&amp;utm_medium&#x3D;readme)
+- 🏠 **API Home**: [DKIM Validator API](https://apiverve.com/marketplace/dkimvalidator?utm_source&#x3D;github&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;readme)
 - 💬 **Support**: [https://apiverve.com/contact](https://apiverve.com/contact)
 - 🐛 **Issues**: [GitHub Issues](../../issues)
 - 📖 **Documentation**: [https://docs.apiverve.com](https://docs.apiverve.com)

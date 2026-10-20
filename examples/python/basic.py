@@ -18,7 +18,7 @@ def call_dkimvalidator_api():
     """
     try:
         # Query parameters
-        params &#x3D; {&#x27;domain&#x27;: &#x27;google.com&#x27;}
+        params &#x3D; {&#x27;domain&#x27;: &#x27;github.com&#x27;, &#x27;selector&#x27;: &#x27;s1&#x27;}
 
         headers = {
             'x-api-key': API_KEY

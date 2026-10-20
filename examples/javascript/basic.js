@@ -15,7 +15,8 @@ async function callDKIMValidatorAPI() {
   try {
     // Query parameters
     const params &#x3D; new URLSearchParams({
-            domain: &#x27;google.com&#x27;
+            domain: &#x27;github.com&#x27;,
+            selector: &#x27;s1&#x27;
         });
 
     const response = await fetch(`${API_URL}?${params}`, {
