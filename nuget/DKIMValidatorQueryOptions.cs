@@ -15,5 +15,11 @@ namespace APIVerve.API.DKIMValidator
         /// </summary>
         [JsonProperty("domain")]
         public string Domain { get; set; }
+
+        /// <summary>
+        /// The DKIM selector to look up (the label before ._domainkey). When omitted, a list of common selectors is tried
+        /// </summary>
+        [JsonProperty("selector")]
+        public string Selector { get; set; }
     }
 }

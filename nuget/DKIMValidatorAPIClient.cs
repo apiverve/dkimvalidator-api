@@ -67,7 +67,8 @@ namespace APIVerve.API.DKIMValidator
         /// <summary>Validation rules for parameters</summary>
         private static readonly Dictionary<string, ValidationRule> _validationRules = new Dictionary<string, ValidationRule>
         {
-            { "domain", new ValidationRule { Type = "string", Required = true, Format = "domain" } }
+            { "domain", new ValidationRule { Type = "string", Required = true, Format = "domain" } },
+            { "selector", new ValidationRule { Type = "string", Required = false } }
         };
 
         /// <summary>Format validation patterns</summary>

@@ -1,13 +1,12 @@
-DKIMValidator API
+DKIM Validator API
 ============
 
 DKIM Validator checks the DomainKeys Identified Mail (DKIM) DNS records for a domain to verify that they are present and correctly formatted.
 
-![Build Status](https://img.shields.io/badge/build-passing-green)
-![Code Climate](https://img.shields.io/badge/maintainability-B-purple)
-![Prod Ready](https://img.shields.io/badge/production-ready-blue)
 
-This is a .NET Wrapper for the [DKIMValidator API](https://apiverve.com/marketplace/dkimvalidator?utm_source=nuget&utm_medium=readme)
+[![NuGet version](https://img.shields.io/nuget/v/APIVerve.API.DKIMValidator.svg)](https://www.nuget.org/packages/APIVerve.API.DKIMValidator)
+
+This is a .NET wrapper for the [DKIM Validator API](https://apiverve.com/marketplace/dkimvalidator?utm_source=nuget&utm_medium=referral&utm_content=readme)
 
 ---
 
@@ -40,8 +39,8 @@ From within Visual Studio:
 
 ## Configuration
 
-Before using the dkimvalidator API client, you have to setup your account and obtain your API Key.
-You can get it by signing up at [https://apiverve.com](https://apiverve.com?utm_source=nuget&utm_medium=readme)
+Before using the DKIM Validator API client, you have to setup your account and obtain your API Key.
+You can get it by signing up at [https://apiverve.com](https://apiverve.com?utm_source=nuget&utm_medium=referral&utm_content=readme)
 
 ---
 
@@ -61,8 +60,9 @@ class Program
         var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]");
 
         var queryOptions = new DKIMValidatorQueryOptions {
-    Domain = "google.com"
-};
+            Domain = "github.com",
+            Selector = "s1"
+        };
 
         // Make the API call
         try
@@ -92,13 +92,13 @@ class Program
 
 ## Usage
 
-The DKIMValidator API documentation is found here: [https://docs.apiverve.com/ref/dkimvalidator](https://docs.apiverve.com/ref/dkimvalidator?utm_source=nuget&utm_medium=readme).
+The DKIM Validator API documentation is found here: [https://docs.apiverve.com/ref/dkimvalidator](https://docs.apiverve.com/ref/dkimvalidator?utm_source=nuget&utm_medium=referral&utm_content=readme).
 You can find parameters, example responses, and status codes documented here.
 
 ### Setup
 
 ###### Authentication
-DKIMValidator API uses API Key-based authentication. When you create an instance of the API client, you can pass your API Key as a parameter.
+DKIM Validator API uses API Key-based authentication. When you create an instance of the API client, you can pass your API Key as a parameter.
 
 ```csharp
 // Create an instance of the API client
@@ -125,8 +125,9 @@ public class Example
         var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]");
 
         var queryOptions = new DKIMValidatorQueryOptions {
-    Domain = "google.com"
-};
+            Domain = "github.com",
+            Selector = "s1"
+        };
 
         var response = await apiClient.ExecuteAsync(queryOptions);
 
@@ -157,8 +158,9 @@ public class Example
         var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]");
 
         var queryOptions = new DKIMValidatorQueryOptions {
-    Domain = "google.com"
-};
+            Domain = "github.com",
+            Selector = "s1"
+        };
 
         var response = apiClient.Execute(queryOptions);
 
@@ -194,8 +196,9 @@ public class Example
         var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]");
 
         var queryOptions = new DKIMValidatorQueryOptions {
-    Domain = "google.com"
-};
+            Domain = "github.com",
+            Selector = "s1"
+        };
 
         try
         {
@@ -250,8 +253,9 @@ public class Example
         apiClient.SetRetryDelay(2000);     // Wait 2 seconds between retries
 
         var queryOptions = new DKIMValidatorQueryOptions {
-    Domain = "google.com"
-};
+            Domain = "github.com",
+            Selector = "s1"
+        };
 
         try
         {
@@ -291,7 +295,8 @@ apiClient.AddCustomHeader("X-Custom-Header", "custom-value");
 apiClient.AddCustomHeader("X-Request-ID", Guid.NewGuid().ToString());
 
 var queryOptions = new DKIMValidatorQueryOptions {
-    Domain = "google.com"
+    Domain = "github.com",
+    Selector = "s1"
 };
 
 var response = await apiClient.ExecuteAsync(queryOptions);
@@ -317,7 +322,8 @@ apiClient.SetLogger(message =>
 });
 
 var queryOptions = new DKIMValidatorQueryOptions {
-    Domain = "google.com"
+    Domain = "github.com",
+    Selector = "s1"
 };
 
 var response = await apiClient.ExecuteAsync(queryOptions);
@@ -335,7 +341,8 @@ apiClient.SetMaxRetries(3);           // Retry up to 3 times (default: 0, max: 3
 apiClient.SetRetryDelay(1500);        // Wait 1.5 seconds between retries (default: 1000ms)
 
 var queryOptions = new DKIMValidatorQueryOptions {
-    Domain = "google.com"
+    Domain = "github.com",
+    Selector = "s1"
 };
 
 var response = await apiClient.ExecuteAsync(queryOptions);
@@ -347,7 +354,8 @@ The API client implements `IDisposable` for proper resource cleanup:
 
 ```csharp
 var queryOptions = new DKIMValidatorQueryOptions {
-    Domain = "google.com"
+    Domain = "github.com",
+    Selector = "s1"
 };
 
 using (var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]"))
@@ -367,27 +375,31 @@ using (var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]"))
   "status": "ok",
   "error": null,
   "data": {
-    "selector": "20230601",
-    "host": "google.com",
-    "dkim_host": "20230601._domainkey.google.com",
+    "selector": "s1",
+    "host": "github.com",
+    "dkim_host": "s1._domainkey.github.com",
     "cname_target": null,
     "has_dkim_record": true,
-    "dkim_record": "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zd3nfUoLHWFbfoPZzAb8bvjsFIIFsNypweLuPe4M+vAP1YxObFxRnpvLYz7Z+bORKLber5aGmgFF9iaufsH1z0+aw8Qex7uDaafzWoJOM/6lAS5iI0JggZiUkqNpRQLL7H6E7HcvOMC61nJcO4r0PwLDZKwEaCs8gUHiqRn/SS3wqEZX29v/VOUVcI4BjaOz",
+    "dkim_record": "k=rsa; t=s; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyn3fMCVpb7ryIRKOGXhXVGYmsWUitNlSckqGHOwNFZgFadplOrD+Qzf1XQkP7MH/VB/97DsAAJGtEXW1Uq71Hjnfr/DuBN/YfjF/gU70qEFb7q1sdIiNtjFL2TkOpoW+X/bhhPNheW/fYwyFb6ZHFM6LTgXyuimWRHTOUP3VjZzhNVda79nt+2WZYbS4l8HdMgWpTNHjpVw5PtXESA9KBg/evSRk5fIaXIX5eRXW3baoV9yVzD8O29/IL/DiSk+yNvaO0EHL5c4yGuZJhGzvpiznb2IDVdemJK4Dqzdy5FTN/SGYZhAEr7MguG3Z314hMS2scgMsOMgB64uj/6+6UwIDAQAB",
     "dkim_records_count": 1,
-    "version": "DKIM1",
     "key_type": "rsa",
-    "key_bits": 1416,
-    "is_test_mode": false,
     "issues_found": [
       {
-        "code": "WEAK_PUBLIC_KEY_BITS",
+        "code": "V_TAG_NOT_FOUND",
         "type": "warning",
-        "message": "Public key uses weak 1416 bits"
+        "message": "The v tag is missing"
+      },
+      {
+        "code": "STRICT_MODE",
+        "type": "info",
+        "message": "Strict flag set (t=s): the i= identity domain must exactly match d= (no subdomains)"
       }
     ],
     "valid": true,
-    "risk_score": 25,
-    "risk_level": "medium"
+    "key_bits": 2048,
+    "is_test_mode": false,
+    "risk_score": 0,
+    "risk_level": "low"
   }
 }
 ```
@@ -396,7 +408,7 @@ using (var apiClient = new DKIMValidatorAPIClient("[YOUR_API_KEY]"))
 
 ## Customer Support
 
-Need any assistance? [Get in touch with Customer Support](https://apiverve.com/contact?utm_source=nuget&utm_medium=readme).
+Need any assistance? [Get in touch with Customer Support](https://apiverve.com/contact?utm_source=nuget&utm_medium=referral&utm_content=readme).
 
 ---
 
@@ -407,12 +419,12 @@ Stay up to date by following [@apiverveHQ](https://twitter.com/apiverveHQ) on Tw
 
 ## Legal
 
-All usage of the APIVerve website, API, and services is subject to the [APIVerve Terms of Service](https://apiverve.com/terms?utm_source=nuget&utm_medium=readme) and all legal documents and agreements.
+All usage of the APIVerve website, API, and services is subject to the [APIVerve Terms of Service](https://apiverve.com/terms?utm_source=nuget&utm_medium=referral&utm_content=readme) and all legal documents and agreements.
 
 ---
 
 ## License
-Licensed under the The MIT License (MIT)
+Licensed under the MIT License (MIT)
 
 Copyright (&copy;) 2026 APIVerve, and EvlarSoft LLC
 

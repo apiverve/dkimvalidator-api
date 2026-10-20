@@ -33,7 +33,7 @@ namespace APIVerve.API.DKIMValidator
     public partial class Data
     {
         [JsonProperty("selector")]
-        public long? Selector { get; set; }
+        public string Selector { get; set; }
 
         [JsonProperty("host")]
         public string Host { get; set; }
@@ -53,23 +53,20 @@ namespace APIVerve.API.DKIMValidator
         [JsonProperty("dkim_records_count")]
         public long? DkimRecordsCount { get; set; }
 
-        [JsonProperty("version")]
-        public string Version { get; set; }
-
         [JsonProperty("key_type")]
         public string KeyType { get; set; }
-
-        [JsonProperty("key_bits")]
-        public long? KeyBits { get; set; }
-
-        [JsonProperty("is_test_mode")]
-        public bool? IsTestMode { get; set; }
 
         [JsonProperty("issues_found")]
         public IssuesFound[] IssuesFound { get; set; }
 
         [JsonProperty("valid")]
         public bool? Valid { get; set; }
+
+        [JsonProperty("key_bits")]
+        public long? KeyBits { get; set; }
+
+        [JsonProperty("is_test_mode")]
+        public bool? IsTestMode { get; set; }
 
         [JsonProperty("risk_score")]
         public long? RiskScore { get; set; }
