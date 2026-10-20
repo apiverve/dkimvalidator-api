@@ -32,12 +32,11 @@ declare module '@apiverve/dkimvalidator' {
       hasDKIMRecord:    boolean | null;
       dkimRecord:       null | string;
       dkimRecordsCount: number | null;
-      version:          null | string;
       keyType:          null | string;
-      keyBits:          number | null;
-      isTestMode:       boolean | null;
       issuesFound:      IssuesFound[];
       valid:            boolean | null;
+      keyBits:          number | null;
+      isTestMode:       boolean | null;
       riskScore:        number | null;
       riskLevel:        null | string;
   }

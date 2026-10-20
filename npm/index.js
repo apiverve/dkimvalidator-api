@@ -30,7 +30,7 @@ class dkimvalidatorWrapper {
         this.baseURL = 'https://api.apiverve.com/v1/dkimvalidator';
 
         // Validation rules for parameters (generated from schema)
-        this.validationRules = {"domain":{"type":"string","required":true,"format":"domain"}};
+        this.validationRules = {"domain":{"type":"string","required":true,"format":"domain"},"selector":{"type":"string","required":false}};
     }
 
     /**

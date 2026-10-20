@@ -15,7 +15,8 @@ const api = new dkimvalidatorAPI({
 
 // Example query
 var query = {
-  domain: "google.com"
+  domain: "github.com",
+  selector: "s1"
 };
 
 // Make the API request using callback

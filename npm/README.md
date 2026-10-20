@@ -2,12 +2,9 @@
 
 DKIM Validator checks the DomainKeys Identified Mail (DKIM) DNS records for a domain to verify that they are present and correctly formatted.
 
-![Build Status](https://img.shields.io/badge/build-passing-green)
-![Code Climate](https://img.shields.io/badge/maintainability-B-purple)
-![Prod Ready](https://img.shields.io/badge/production-ready-blue)
 [![npm version](https://img.shields.io/npm/v/@apiverve/dkimvalidator.svg)](https://www.npmjs.com/package/@apiverve/dkimvalidator)
 
-This is a Javascript Wrapper for the [DKIM Validator API](https://apiverve.com/marketplace/dkimvalidator?utm_source=npm&utm_medium=readme)
+This is a JavaScript wrapper for the [DKIM Validator API](https://apiverve.com/marketplace/dkimvalidator?utm_source=npm&utm_medium=referral&utm_content=readme)
 
 ---
 
@@ -28,15 +25,15 @@ yarn add @apiverve/dkimvalidator
 ## Configuration
 
 Before using the DKIM Validator API client, you have to setup your account and obtain your API Key.
-You can get it by signing up at [https://apiverve.com](https://apiverve.com?utm_source=npm&utm_medium=readme)
+You can get it by signing up at [https://apiverve.com](https://apiverve.com?utm_source=npm&utm_medium=referral&utm_content=readme)
 
 ---
 
 ## Quick Start
 
-[Get started with the Quick Start Guide](https://docs.apiverve.com/quickstart?utm_source=npm&utm_medium=readme)
+[Get started with the Quick Start Guide](https://docs.apiverve.com/quickstart?utm_source=npm&utm_medium=referral&utm_content=readme)
 
-The DKIM Validator API documentation is found here: [https://docs.apiverve.com/ref/dkimvalidator](https://docs.apiverve.com/ref/dkimvalidator?utm_source=npm&utm_medium=readme).
+The DKIM Validator API documentation is found here: [https://docs.apiverve.com/ref/dkimvalidator](https://docs.apiverve.com/ref/dkimvalidator?utm_source=npm&utm_medium=referral&utm_content=readme).
 You can find parameters, example responses, and status codes documented here.
 
 ### Setup
@@ -60,7 +57,8 @@ Using the API is simple. All you have to do is make a request. The API will retu
 
 ```javascript
 var query = {
-  domain: "google.com"
+  domain: "github.com",
+  selector: "s1"
 };
 
 api.execute(query, function (error, data) {
@@ -80,7 +78,8 @@ You can also use promises to make requests. The API returns a promise that you c
 
 ```javascript
 var query = {
-  domain: "google.com"
+  domain: "github.com",
+  selector: "s1"
 };
 
 api.execute(query)
@@ -101,7 +100,8 @@ You can also use async/await to make requests. The API returns a promise that yo
 ```javascript
 async function makeRequest() {
     var query = {
-  domain: "google.com"
+  domain: "github.com",
+  selector: "s1"
 };
 
     try {
@@ -122,27 +122,31 @@ async function makeRequest() {
   "status": "ok",
   "error": null,
   "data": {
-    "selector": "20230601",
-    "host": "google.com",
-    "dkim_host": "20230601._domainkey.google.com",
+    "selector": "s1",
+    "host": "github.com",
+    "dkim_host": "s1._domainkey.github.com",
     "cname_target": null,
     "has_dkim_record": true,
-    "dkim_record": "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zd3nfUoLHWFbfoPZzAb8bvjsFIIFsNypweLuPe4M+vAP1YxObFxRnpvLYz7Z+bORKLber5aGmgFF9iaufsH1z0+aw8Qex7uDaafzWoJOM/6lAS5iI0JggZiUkqNpRQLL7H6E7HcvOMC61nJcO4r0PwLDZKwEaCs8gUHiqRn/SS3wqEZX29v/VOUVcI4BjaOz",
+    "dkim_record": "k=rsa; t=s; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyn3fMCVpb7ryIRKOGXhXVGYmsWUitNlSckqGHOwNFZgFadplOrD+Qzf1XQkP7MH/VB/97DsAAJGtEXW1Uq71Hjnfr/DuBN/YfjF/gU70qEFb7q1sdIiNtjFL2TkOpoW+X/bhhPNheW/fYwyFb6ZHFM6LTgXyuimWRHTOUP3VjZzhNVda79nt+2WZYbS4l8HdMgWpTNHjpVw5PtXESA9KBg/evSRk5fIaXIX5eRXW3baoV9yVzD8O29/IL/DiSk+yNvaO0EHL5c4yGuZJhGzvpiznb2IDVdemJK4Dqzdy5FTN/SGYZhAEr7MguG3Z314hMS2scgMsOMgB64uj/6+6UwIDAQAB",
     "dkim_records_count": 1,
-    "version": "DKIM1",
     "key_type": "rsa",
-    "key_bits": 1416,
-    "is_test_mode": false,
     "issues_found": [
       {
-        "code": "WEAK_PUBLIC_KEY_BITS",
+        "code": "V_TAG_NOT_FOUND",
         "type": "warning",
-        "message": "Public key uses weak 1416 bits"
+        "message": "The v tag is missing"
+      },
+      {
+        "code": "STRICT_MODE",
+        "type": "info",
+        "message": "Strict flag set (t=s): the i= identity domain must exactly match d= (no subdomains)"
       }
     ],
     "valid": true,
-    "risk_score": 25,
-    "risk_level": "medium"
+    "key_bits": 2048,
+    "is_test_mode": false,
+    "risk_score": 0,
+    "risk_level": "low"
   }
 }
 ```
@@ -151,7 +155,7 @@ async function makeRequest() {
 
 ## Customer Support
 
-Need any assistance? [Get in touch with Customer Support](https://apiverve.com/contact?utm_source=npm&utm_medium=readme).
+Need any assistance? [Get in touch with Customer Support](https://apiverve.com/contact?utm_source=npm&utm_medium=referral&utm_content=readme).
 
 ---
 
@@ -163,12 +167,12 @@ Stay up to date by following [@apiverveHQ](https://twitter.com/apiverveHQ) on Tw
 
 ## Legal
 
-All usage of the APIVerve website, API, and services is subject to the [APIVerve Terms of Service](https://apiverve.com/terms?utm_source=npm&utm_medium=readme), [Privacy Policy](https://apiverve.com/privacy?utm_source=npm&utm_medium=readme), and [Refund Policy](https://apiverve.com/refund?utm_source=npm&utm_medium=readme).
+All usage of the APIVerve website, API, and services is subject to the [APIVerve Terms of Service](https://apiverve.com/terms?utm_source=npm&utm_medium=referral&utm_content=readme) and [Privacy Policy](https://apiverve.com/privacy?utm_source=npm&utm_medium=referral&utm_content=readme).
 
 ---
 
 ## License
-Licensed under the The MIT License (MIT)
+Licensed under the MIT License (MIT)
 
 Copyright (&copy;) 2026 APIVerve, and EvlarSoft LLC
 
