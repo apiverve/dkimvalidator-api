@@ -15,11 +15,11 @@ use APIVerve\Dkimvalidator\Exceptions\ValidationException;
  * @example Basic usage
  * ```php
  * $client = new Client('your_api_key');
- * $response = $client->execute(['domain' => 'google.com']);
+ * $response = $client->execute(['domain' => 'github.com', 'selector' => 's1']);
  * print_r($response);
  * ```
  *
- * @see https://apiverve.com/marketplace/dkimvalidator?utm_source=php&utm_medium=readme
+ * @see https://apiverve.com/marketplace/dkimvalidator?utm_source=php&utm_medium=referral&utm_content=readme
  */
 class Client
 {
@@ -34,7 +34,8 @@ class Client
      * Validation rules for parameters
      */
     private const VALIDATION_RULES = [
-        'domain' => ['type' => 'string', 'required' => true, 'format' => 'domain']
+        'domain' => ['type' => 'string', 'required' => true, 'format' => 'domain'],
+        'selector' => ['type' => 'string', 'required' => false]
     ];
 
     /**

@@ -27,7 +27,10 @@ use APIVerve\Dkimvalidator\Client;
 $client = new Client('YOUR_API_KEY');
 
 // Make a request
-$response = $client->execute(['domain' => 'google.com']);
+$response = $client->execute([
+    'domain' => 'github.com',
+    'selector' => 's1'
+]);
 
 // Print the response
 print_r($response);
@@ -42,7 +45,7 @@ use APIVerve\Dkimvalidator\Exceptions\APIException;
 use APIVerve\Dkimvalidator\Exceptions\ValidationException;
 
 try {
-    $response = $client->execute(['domain' => 'google.com']);
+    $response = $client->execute(['domain' => 'github.com', 'selector' => 's1']);
     print_r($response['data']);
 } catch (ValidationException $e) {
     echo "Validation error: " . implode(', ', $e->getErrors());
@@ -69,27 +72,31 @@ $client = new Client(
   "status": "ok",
   "error": null,
   "data": {
-    "selector": "20230601",
-    "host": "google.com",
-    "dkim_host": "20230601._domainkey.google.com",
+    "selector": "s1",
+    "host": "github.com",
+    "dkim_host": "s1._domainkey.github.com",
     "cname_target": null,
     "has_dkim_record": true,
-    "dkim_record": "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4zd3nfUoLHWFbfoPZzAb8bvjsFIIFsNypweLuPe4M+vAP1YxObFxRnpvLYz7Z+bORKLber5aGmgFF9iaufsH1z0+aw8Qex7uDaafzWoJOM/6lAS5iI0JggZiUkqNpRQLL7H6E7HcvOMC61nJcO4r0PwLDZKwEaCs8gUHiqRn/SS3wqEZX29v/VOUVcI4BjaOz",
+    "dkim_record": "k=rsa; t=s; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyn3fMCVpb7ryIRKOGXhXVGYmsWUitNlSckqGHOwNFZgFadplOrD+Qzf1XQkP7MH/VB/97DsAAJGtEXW1Uq71Hjnfr/DuBN/YfjF/gU70qEFb7q1sdIiNtjFL2TkOpoW+X/bhhPNheW/fYwyFb6ZHFM6LTgXyuimWRHTOUP3VjZzhNVda79nt+2WZYbS4l8HdMgWpTNHjpVw5PtXESA9KBg/evSRk5fIaXIX5eRXW3baoV9yVzD8O29/IL/DiSk+yNvaO0EHL5c4yGuZJhGzvpiznb2IDVdemJK4Dqzdy5FTN/SGYZhAEr7MguG3Z314hMS2scgMsOMgB64uj/6+6UwIDAQAB",
     "dkim_records_count": 1,
-    "version": "DKIM1",
     "key_type": "rsa",
-    "key_bits": 1416,
-    "is_test_mode": false,
     "issues_found": [
       {
-        "code": "WEAK_PUBLIC_KEY_BITS",
+        "code": "V_TAG_NOT_FOUND",
         "type": "warning",
-        "message": "Public key uses weak 1416 bits"
+        "message": "The v tag is missing"
+      },
+      {
+        "code": "STRICT_MODE",
+        "type": "info",
+        "message": "Strict flag set (t=s): the i= identity domain must exactly match d= (no subdomains)"
       }
     ],
     "valid": true,
-    "risk_score": 25,
-    "risk_level": "medium"
+    "key_bits": 2048,
+    "is_test_mode": false,
+    "risk_score": 0,
+    "risk_level": "low"
   }
 }
 ```
@@ -101,11 +108,11 @@ $client = new Client(
 
 ## Documentation
 
-For more information, visit the [API Documentation](https://docs.apiverve.com/ref/dkimvalidator?utm_source=packagist&utm_medium=readme).
+For more information, visit the [API Documentation](https://docs.apiverve.com/ref/dkimvalidator?utm_source=packagist&utm_medium=referral&utm_content=readme).
 
 ## Support
 
-- Website: [https://apiverve.com/marketplace/dkimvalidator?utm_source=php&utm_medium=readme](https://apiverve.com/marketplace/dkimvalidator?utm_source=php&utm_medium=readme)
+- Website: [https://apiverve.com/marketplace/dkimvalidator?utm_source=php&utm_medium=referral&utm_content=readme](https://apiverve.com/marketplace/dkimvalidator?utm_source=php&utm_medium=referral&utm_content=readme)
 - Email: hello@apiverve.com
 
 ## License
