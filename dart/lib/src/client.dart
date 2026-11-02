@@ -46,10 +46,11 @@ final _formatPatterns = {
 
 /// DKIM Validator API client.
 ///
-/// For more information, visit: https://apiverve.com/marketplace/dkimvalidator?utm_source=dart&utm_medium=readme
+/// For more information, visit: https://apiverve.com/marketplace/dkimvalidator?utm_source=dart&utm_medium=referral&utm_content=readme
 ///
 /// Parameters:
-/// * [domain] (required) - The domain to validate the DKIM record for
+/// * [domain] (required) - The domain to validate the DKIM record for [format: domain]
+/// * [selector] - The DKIM selector to look up (the label before ._domainkey). When omitted, a list of common selectors is tried
 class DkimvalidatorClient {
   final String apiKey;
   final String baseUrl;
@@ -57,7 +58,8 @@ class DkimvalidatorClient {
 
   /// Validation rules for parameters.
   static final Map<String, ValidationRule> _validationRules = <String, ValidationRule>{
-    'domain': ValidationRule(type: 'string', required: true),
+    'domain': ValidationRule(type: 'string', required: true, format: 'domain'),
+    'selector': ValidationRule(type: 'string', required: false),
   };
 
   DkimvalidatorClient(this.apiKey, {
