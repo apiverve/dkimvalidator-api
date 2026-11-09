@@ -1,6 +1,6 @@
 name: apiverve_dkimvalidator
 description: "DKIM Validator checks the DomainKeys Identified Mail (DKIM) DNS records for a domain to verify that they are present and correctly formatted."
-version: 1.2.4
+version: 1.2.5
 homepage: https://apiverve.com/marketplace/dkimvalidator?utm_source=dart&utm_medium=referral&utm_content=homepage
 repository: https://github.com/apiverve/dkimvalidator-api/tree/main/dart
 
